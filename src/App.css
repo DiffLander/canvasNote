@@ -1,0 +1,399 @@
+/* App container */
+.app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Canvas */
+.canvas-wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin-left: 40px; /* Add margin to account for collapsed template browser */
+}
+
+.canvas-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: visible;
+}
+
+.canvas-background {
+  width: 100%;
+  height: 100%;
+  min-width: 10000px; /* Dramatically increased to provide much more canvas space */
+  min-height: 10000px; /* Dramatically increased to provide much more canvas space */
+  background-color: #f5f5f5;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 25px 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  min-width: 10000px; /* Match background size */
+  min-height: 10000px; /* Match background size */
+}
+
+/* Make sure transform components don't constrain size */
+.react-transform-wrapper,
+.transform-component-module_wrapper__SPB86 {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  position: absolute !important;
+  overflow: visible !important;
+}
+
+.react-transform-component,
+.transform-component-module_content__FBWxo {
+  width: auto !important;
+  height: auto !important;
+  min-width: 10000px !important; /* Match canvas size */
+  min-height: 10000px !important; /* Match canvas size */
+  transform-origin: 0 0 !important;
+}
+
+/* Zoom controls */
+.zoom-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  gap: 5px;
+  background-color: white;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.zoom-controls button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.zoom-controls button:hover {
+  background-color: #e9ecef;
+}
+
+/* Context Menu */
+.context-menu {
+  position: absolute;
+  z-index: 1000;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+}
+
+.context-menu-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.context-menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.context-menu-divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 4px 0;
+}
+
+/* Template browser */
+.template-browser {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, width 0.3s;
+  overflow: hidden;
+}
+
+.template-browser.collapsed {
+  transform: translateX(-210px);
+  width: 250px;
+}
+
+.template-browser-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.template-browser-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.template-browser-toggle {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #555;
+}
+
+.template-browser-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.template-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.template-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.template-item:hover {
+  background-color: #f0f0f0;
+}
+
+.template-item-title {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.template-item-desc {
+  font-size: 12px;
+  color: #777;
+}
+
+.template-browser-footer {
+  padding: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+}
+
+.create-template-btn {
+  background-color: #34a853;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.create-template-btn:hover {
+  background-color: #2d9144;
+}
+
+/* Template submenu */
+.template-submenu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  min-width: 200px;
+  display: none;
+}
+
+.context-menu-item:hover .template-submenu {
+  display: block;
+}
+
+.template-item {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+}
+
+.template-description {
+  font-size: 12px;
+  color: #777;
+  margin-top: 4px;
+}
+
+/* Template Editor */
+.template-editor {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  background-color: white;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s;
+  overflow: hidden;
+}
+
+.template-editor.hidden {
+  transform: translateX(100%);
+}
+
+.template-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.template-editor-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.template-editor-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+}
+
+.template-editor-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.template-editor-footer {
+  padding: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.template-editor-save {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.template-editor-save:hover {
+  background-color: #3367d6;
+}
+
+.template-editor-cancel {
+  background-color: #f1f3f4;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.template-editor-cancel:hover {
+  background-color: #e8eaed;
+}
+
+.template-form-group {
+  margin-bottom: 15px;
+}
+
+.template-form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.template-form-input,
+.template-form-select,
+.template-form-textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.template-form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.template-code-editor {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  min-height: 200px;
+  font-family: monospace;
+  margin-top: 10px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.template-error {
+  color: #d93025;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* Resizing styles - minimal to not interfere with templates */
+.react-resizable-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+  width: 10px;
+  height: 10px;
+}
+
+/* Error fallback for missing templates */
+.note-error {
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  border-radius: 4px;
+  padding: 10px;
+  color: #c62828;
+  width: 250px;
+  height: 150px;
+}
